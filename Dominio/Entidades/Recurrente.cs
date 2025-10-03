@@ -28,7 +28,7 @@ namespace Dominio.Entidades
         
         protected decimal Recargo() 
         {
-            if (NumCuotas == 0 || NumCuotas <= 5)
+            if (NumCuotas == 0 || NumCuotas <= 5)  
             {
                 return Monto * 0.03m;
             } 

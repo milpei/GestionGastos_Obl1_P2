@@ -153,10 +153,7 @@ namespace GestionGastos_Obl1_P2
             Console.WriteLine("6 - Agregar pago Unico");
         }
 
-
         
-
-
     }
 }
 

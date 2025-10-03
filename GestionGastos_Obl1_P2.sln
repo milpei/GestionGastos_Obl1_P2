@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionGastos_Obl1_P2", "GestionGastos_Obl1_P2\GestionGastos_Obl1_P2.csproj", "{72580293-6D30-46AE-B711-E91FCA066F5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{A05E8EEC-6359-43F8-A646-86B8F7107660}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72580293-6D30-46AE-B711-E91FCA066F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72580293-6D30-46AE-B711-E91FCA066F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72580293-6D30-46AE-B711-E91FCA066F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72580293-6D30-46AE-B711-E91FCA066F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05E8EEC-6359-43F8-A646-86B8F7107660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05E8EEC-6359-43F8-A646-86B8F7107660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05E8EEC-6359-43F8-A646-86B8F7107660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05E8EEC-6359-43F8-A646-86B8F7107660}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {502E1C5C-2D24-4154-B83B-B69707FBE624}
+	EndGlobalSection
+EndGlobal

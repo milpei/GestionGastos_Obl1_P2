@@ -32,10 +32,9 @@ namespace Dominio
         {
             GenerarEmail(u);
             u.Validar();
-            while (_usuarios.Contains(u)); // valida el mail del ususario, si este ya existe lo ingresa con un mail nuevo.
+            // while (_usuarios.Contains(u));  CON LA NUEVA RESOLUCION CREO QUE HACER ESTO YA NO TIENE SENTIDO. SERIA CHEQUEAR QUE EL MAIL GENERADO NO SEA INCORRECTO.
             _usuarios.Add(u);
         }
-        // Hay un problema en el pienso del sistema, el usuario se diferencia por el mail, pero para yo chequear correctamente si el ususario no existe deberia tener la cedula del mismo.
 
 
         public void AgregarEquipo(Equipo e)
@@ -58,17 +57,6 @@ namespace Dominio
             _pagos.Add(p);
         }
 
-        public List<Usuario> UsuariosPorEquipo(int idEquipo)
-        {
-            List<Usuario> retorno = new List<Usuario>();
-
-            foreach (Usuario u in _usuarios)
-            {
-                if (u.Equipo.Id == idEquipo) retorno.Add(u);
-            }
-
-            return retorno;
-        }
 
         public Equipo BuscarEquipoPorNom(string nomEquipo)
         {
@@ -142,7 +130,17 @@ namespace Dominio
             return u;
         }
 
+        public List<Pago> PagosMesX(DateTime fecha)
+        {
+            List<Pago> pagosMesX = new List<Pago>();
 
+            foreach(Pago p in _pagos)
+            {
+                if (p.EsDelMesX(fecha)) pagosMesX.Add(p);
+            }
+
+            return pagosMesX;
+        }
 
         //DATOS DE PRECARGA;
 
@@ -268,15 +266,15 @@ namespace Dominio
         // 17 Pagos ÚNICOS
             new Unico(new DateTime(2025, 09, 12), "REC-1001", MetodosDePago.Efectivo, tComidas,      u3,  "Almuerzo planning",       420m),
             new Unico(new DateTime(2025, 08, 28), "REC-1002", MetodosDePago.Credito,  tHardware,     u4,  "Mouse ergonómico",        950m),
-            new Unico(new DateTime(2025, 08, 05), "REC-1003", MetodosDePago.Debito,   tEventos,      u5,  "Entrada meetup JS",       300m),
+            new Unico(new DateTime(2024, 08, 05), "REC-1003", MetodosDePago.Debito,   tEventos,      u5,  "Entrada meetup JS",       300m),
             new Unico(new DateTime(2025, 09, 02), "REC-1004", MetodosDePago.Credito,  tViajes,       u6,  "Taxi a cliente",          680m),
             new Unico(new DateTime(2025, 07, 19), "REC-1005", MetodosDePago.Debito,   tOficina,      u7,  "Resma de hojas",          250m),
-            new Unico(new DateTime(2025, 09, 20), "REC-1006", MetodosDePago.Efectivo, tSuscr,        u8,  "Add-on puntual",          500m),
+            new Unico(new DateTime(2025, 10, 20), "REC-1006", MetodosDePago.Efectivo, tSuscr,        u8,  "Add-on puntual",          500m),
             new Unico(new DateTime(2025, 08, 15), "REC-1007", MetodosDePago.Credito,  tCapacitacion, u9,  "Examen certificación",    1500m),
             new Unico(new DateTime(2025, 09, 07), "REC-1008", MetodosDePago.Debito,   tAfters,       u10, "Pizza cierre sprint",     380m),
-            new Unico(new DateTime(2025, 09, 25), "REC-1009", MetodosDePago.Credito,  tAuto,         u11, "Peaje visita cliente",    180m),
+            new Unico(new DateTime(2024, 09, 25), "REC-1009", MetodosDePago.Credito,  tAuto,         u11, "Peaje visita cliente",    180m),
             new Unico(new DateTime(2025, 08, 22), "REC-1010", MetodosDePago.Efectivo, tOficina,      u12, "Cables HDMI",             420m),
-            new Unico(new DateTime(2025, 09, 14), "REC-1011", MetodosDePago.Debito,   tHardware,     u13, "SSD externo",            3200m),
+            new Unico(new DateTime(2025, 10, 14), "REC-1011", MetodosDePago.Debito,   tHardware,     u13, "SSD externo",            3200m),
             new Unico(new DateTime(2025, 07, 03), "REC-1012", MetodosDePago.Credito,  tEventos,      u14, "Taller de UX",           2100m),
             new Unico(new DateTime(2025, 08, 10), "REC-1013", MetodosDePago.Efectivo, tComidas,      u15, "Desayuno demo",           290m),
             new Unico(new DateTime(2025, 09, 03), "REC-1014", MetodosDePago.Debito,   tNube,         u16, "IP fija adicional",       850m),

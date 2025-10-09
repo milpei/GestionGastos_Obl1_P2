@@ -35,7 +35,7 @@ namespace Dominio.Entidades
 
         public override string ToString()
         {
-            return $"Nombre: {_nombre} Descripcion {_descripcion}";
+            return $"Nombre: {_nombre}, Descripcion: {_descripcion}";
         }
 
 

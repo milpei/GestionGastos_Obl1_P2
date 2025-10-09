@@ -30,7 +30,7 @@ namespace Dominio.Entidades
 
         public override string ToString()
         {
-            return $"id: {_id} Metodo de pago: {MetodoPago}";
+            return $"id: {_id}, Metodo de pago: {MetodoPago},";
         }
 
 
@@ -58,8 +58,7 @@ namespace Dominio.Entidades
             TipoGasto.Validar();
         }
 
-
-
+        public abstract bool EsDelMesX(DateTime fecha);
 
     }
 }

@@ -29,9 +29,9 @@ namespace GestionGastos_Obl1_P2
                         {
                             Console.WriteLine(u.Nombre, u.Email, u.Equipo.ToString());
                         }
-                            Console.ReadKey();
-                            Console.Clear();
-                            opcion = 0;
+                        Console.ReadKey();
+                        Console.Clear();
+                        opcion = 0;
 
                         break;
 
@@ -130,37 +130,26 @@ namespace GestionGastos_Obl1_P2
                         break;
 
                     case 5:
-                        Console.WriteLine("Ingrese una fecha de inicio dd/mm/aaaa");
-                        DateTime.TryParse(Console.ReadLine(), out DateTime fInicio);
+                        Console.Clear();
+                        List<Pago> pagosDeEsteMes = s.PagosMesX(DateTime.Now);
 
-                        Console.WriteLine("Ingrese una fecha de fin dd/mm/aaaa");
-                        DateTime.TryParse(Console.ReadLine(), out DateTime fFin);
-
-                        Console.WriteLine("0 - Credito, 1 - Debito, 2 - Efectivo");
-                        MetodosDePago.TryParse(Console.ReadLine(), out MetodosDePago metodoPagoRecurrente);
-
-                        Console.WriteLine("Elija el tipo de gasto");
-                        foreach (TipoDeGasto t in s.TiposDeGasto)
+                        if (pagosDeEsteMes.Count == 0)
                         {
-                            Console.WriteLine($"Nombre: {t.Nombre} Descripcion: {t.Descripcion} ");
+                            Console.WriteLine("No hay pagos en este mes");
                         }
-                        string tipoGastoR = Console.ReadLine();
+                        else
+                        {
+                            foreach (Pago p in pagosDeEsteMes)
+                            {
+                                Console.WriteLine(p);
+                            }
+                        }
 
-                        Console.WriteLine("Ingrese su email");
-                        string emailUsuarioR = Console.ReadLine();
-
-                        Console.WriteLine("Ingrese una descripcion");
-                        string descripcionR = Console.ReadLine();
-
-                        Console.WriteLine("Ingrese un monto");
-                        Decimal.TryParse(Console.ReadLine(), out decimal montoR);
-
-
-                        Pago pagoRecurrente = new Recurrente(fInicio, fFin, metodoPagoRecurrente, s.ObtenerTipoGastoPorNombre(tipoGastoR), s.ObtenerUsuarioPorMail(emailUsuarioR), descripcionR, montoR);
-                        s.AgregarPago(pagoRecurrente);
-
-                        //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
+                        Console.ReadKey();
+                        Console.Clear();
+                        opcion = 0;
                         break;
+
 
                     case 6:
                         Console.WriteLine("Ingrese una fecha del pago dd/mm/aaaa");
@@ -195,6 +184,39 @@ namespace GestionGastos_Obl1_P2
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
                         break;
 
+                    case 7:
+                        Console.WriteLine("Ingrese una fecha de inicio dd/mm/aaaa");
+                        DateTime.TryParse(Console.ReadLine(), out DateTime fInicio);
+
+                        Console.WriteLine("Ingrese una fecha de fin dd/mm/aaaa");
+                        DateTime.TryParse(Console.ReadLine(), out DateTime fFin);
+
+                        Console.WriteLine("0 - Credito, 1 - Debito, 2 - Efectivo");
+                        MetodosDePago.TryParse(Console.ReadLine(), out MetodosDePago metodoPagoRecurrente);
+
+                        Console.WriteLine("Elija el tipo de gasto");
+                        foreach (TipoDeGasto t in s.TiposDeGasto)
+                        {
+                            Console.WriteLine($"Nombre: {t.Nombre} Descripcion: {t.Descripcion} ");
+                        }
+                        string tipoGastoR = Console.ReadLine();
+
+                        Console.WriteLine("Ingrese su email");
+                        string emailUsuarioR = Console.ReadLine();
+
+                        Console.WriteLine("Ingrese una descripcion");
+                        string descripcionR = Console.ReadLine();
+
+                        Console.WriteLine("Ingrese un monto");
+                        Decimal.TryParse(Console.ReadLine(), out decimal montoR);
+
+
+                        Pago pagoRecurrente = new Recurrente(fInicio, fFin, metodoPagoRecurrente, s.ObtenerTipoGastoPorNombre(tipoGastoR), s.ObtenerUsuarioPorMail(emailUsuarioR), descripcionR, montoR);
+                        s.AgregarPago(pagoRecurrente);
+
+                        //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
+                        break;
+
                     case 99:
                         flag1 = false;
                         break;
@@ -210,8 +232,9 @@ namespace GestionGastos_Obl1_P2
             Console.WriteLine("2 - Dado un correo de usuario listar todos los pagos que realizó ese usuario");
             Console.WriteLine("3 - Alta de un usuario");
             Console.WriteLine("4 - Mostrar usuarios pertenecientes al equipo");
-            Console.WriteLine("5 - Agregar pago Recurrente");
+            Console.WriteLine("5 - Ver pagos del mes actual");
             Console.WriteLine("6 - Agregar pago Unico");
+            Console.WriteLine("7 - Agregar pago Recurrente");
             Console.WriteLine("99 - Salir");
         }
 

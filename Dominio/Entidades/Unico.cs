@@ -21,7 +21,7 @@ namespace Dominio.Entidades
 
         public override string ToString()
         {
-            return base.ToString() + $"Monto total: {MontoFinal}";
+            return base.ToString() + $" Monto total: {MontoFinal}";
         }
 
        
@@ -58,9 +58,14 @@ namespace Dominio.Entidades
             if (string.IsNullOrEmpty(NumRecibo)) throw new Exception("Se debe ingresar un numero de recibo");
         }
 
-      
+        public override bool EsDelMesX(DateTime fecha)
+        {
+            return FPago.Month == fecha.Month && FPago.Year == fecha.Year; 
 
-        
+            
+        }
+
+
 
     }
 }

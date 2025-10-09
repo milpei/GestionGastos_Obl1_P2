@@ -27,7 +27,7 @@ namespace GestionGastos_Obl1_P2
                         Console.Clear();
                         foreach (Usuario u in s.Usuarios)
                         {
-                            Console.WriteLine(u.Nombre, u.Email, u.Equipo.ToString());
+                            Console.WriteLine($"{u.Nombre}, {u.Email}, {u.Equipo.Nombre}");
                         }
                         Console.ReadKey();
                         Console.Clear();
@@ -119,7 +119,7 @@ namespace GestionGastos_Obl1_P2
                                 Console.Clear();
                                 foreach (Usuario u in integrantesEquipo)
                                 {
-                                    Console.WriteLine(u.Nombre, u.Email);
+                                    Console.WriteLine($"{u.Nombre}, {u.Email}");
                                 }
                                 flag3 = false;
                             }

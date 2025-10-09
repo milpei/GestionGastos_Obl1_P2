@@ -40,6 +40,7 @@ namespace Dominio.Entidades
             ValidarUsuario();
             ValidarDesc();
             ValidarMonto();
+            ValidarTipo();
         }
         protected virtual void ValidarUsuario() 
         {
@@ -57,6 +58,7 @@ namespace Dominio.Entidades
         {
             TipoGasto.Validar();
         }
+        
 
         public abstract bool EsDelMesX(DateTime fecha);
 

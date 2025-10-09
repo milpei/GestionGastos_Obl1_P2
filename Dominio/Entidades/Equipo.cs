@@ -22,7 +22,7 @@ namespace Dominio.Entidades
 
         public override string ToString()
         {
-            return $"Nombre: {Nombre}, ID: {_id}" ;
+            return $"Nombre Equipo: {Nombre}, ID: {_id}" ;
         }
 
         public void Validar()

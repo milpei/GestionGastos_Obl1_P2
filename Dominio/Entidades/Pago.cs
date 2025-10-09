@@ -53,9 +53,12 @@ namespace Dominio.Entidades
         {
             if (Monto <= 0) throw new Exception("El monto debe ser mayor a cero");
         }
+        protected virtual void ValidarTipo()
+        {
+            TipoGasto.Validar();
+        }
 
-        
-        
+
 
 
     }

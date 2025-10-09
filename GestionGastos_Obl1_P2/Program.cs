@@ -16,11 +16,12 @@ namespace GestionGastos_Obl1_P2
             {
                 MostrarOpciones();
                 if (!int.TryParse(Console.ReadLine(), out int opcion)) Console.WriteLine("Se debe ingresar un numero");
-
+                Console.Clear();
 
                 switch (opcion)
                 {
-                    case 0: flag = false;
+                    case 0:
+                        flag = false;
                         break;
 
                     case 1:
@@ -34,7 +35,7 @@ namespace GestionGastos_Obl1_P2
                     case 2:
                         Console.WriteLine("Ingrese el Email que desea buscar");
                         string email = Console.ReadLine();
-                        
+
                         List<Pago> pagosUsuario = s.PagosPorUsuario(email);
 
                         foreach (Pago p in pagosUsuario)
@@ -46,16 +47,39 @@ namespace GestionGastos_Obl1_P2
 
                     case 3:
                         Console.WriteLine("Ingrese el nombre de su nuevo usuario");
-                        string user = Console.ReadLine();
+                        string nombre = Console.ReadLine();
+                        Console.Clear();
                         Console.WriteLine("Ingrese el apellido de su nuevo usuario");
                         string apellido = Console.ReadLine();
+                        Console.Clear();
                         Console.WriteLine("Ingrese su contraseña");
                         string contra = Console.ReadLine();
+                        Console.Clear();
                         Console.WriteLine("Ingrese el nombre de su equipo");
-                        string nomEquipo = Console.ReadLine();
+                        while (flag)
+                        {
+                            foreach (Equipo e in s.Equipos)
+                            {
+                                Console.WriteLine(e.Nombre);
+                            }
 
-                        Usuario nuevoUsuario = new Usuario(user, apellido, contra, s.BuscarEquipoPorNom(nomEquipo), DateTime.Now);
-                        s.AgregarUsuario(nuevoUsuario);
+                            string nomEquipo = Console.ReadLine();
+
+                            if (s.BuscarEquipoPorNom(nomEquipo) != null)
+                            {
+
+                                flag = false;
+                                Usuario nuevoUsuario = new Usuario(nombre, apellido, contra, s.BuscarEquipoPorNom(nomEquipo), DateTime.Now);
+                                s.AgregarUsuario(nuevoUsuario);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("El equipo no existe ingreselo de nuevo");
+                            }
+
+
+                        }
 
                         break;
 
@@ -99,7 +123,7 @@ namespace GestionGastos_Obl1_P2
                         Decimal.TryParse(Console.ReadLine(), out decimal montoR);
 
 
-                        Pago pagoRecurrente = new Recurrente(fInicio, fFin, metodoPagoRecurrente, s.ObtenerTipoGastoPorNombre(tipoGastoR), s.ObtenerUsuarioPorMail(emailUsuarioR),descripcionR, montoR);
+                        Pago pagoRecurrente = new Recurrente(fInicio, fFin, metodoPagoRecurrente, s.ObtenerTipoGastoPorNombre(tipoGastoR), s.ObtenerUsuarioPorMail(emailUsuarioR), descripcionR, montoR);
                         s.AgregarPago(pagoRecurrente);
 
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
@@ -136,7 +160,7 @@ namespace GestionGastos_Obl1_P2
                         s.AgregarPago(pagoUnico);
 
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
-                        break; 
+                        break;
                 }
             }
         }
@@ -153,7 +177,7 @@ namespace GestionGastos_Obl1_P2
             Console.WriteLine("6 - Agregar pago Unico");
         }
 
-        
+
     }
 }
 

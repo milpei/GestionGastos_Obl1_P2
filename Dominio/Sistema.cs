@@ -1,4 +1,5 @@
 ﻿using Dominio.Entidades;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio
 {
@@ -23,13 +24,15 @@ namespace Dominio
             _tiposDeGasto = new List<TipoDeGasto>();
 
             PrecargarDatos();
+            
         }
 
 
         public void AgregarUsuario(Usuario u)
         {
+            GenerarEmail(u);
             u.Validar();
-            while (_usuarios.Contains(u)) u.CambiarEmail(); // valida el mail del ususario, si este ya existe lo ingresa con un mail nuevo.
+            while (_usuarios.Contains(u)); // valida el mail del ususario, si este ya existe lo ingresa con un mail nuevo.
             _usuarios.Add(u);
         }
         // Hay un problema en el pienso del sistema, el usuario se diferencia por el mail, pero para yo chequear correctamente si el ususario no existe deberia tener la cedula del mismo.
@@ -67,11 +70,11 @@ namespace Dominio
             return retorno;
         }
 
-        public Equipo BuscarEquipoPorNom(string NomEquipo)
+        public Equipo BuscarEquipoPorNom(string nomEquipo)
         {
             foreach (Equipo e in _equipos)
             {
-                if (e.Equals(NomEquipo)) return e;
+                if (e.Nombre == nomEquipo) return e;
             }
 
             return null;
@@ -121,6 +124,22 @@ namespace Dominio
                 if (u.Email == email) return u;
             }
             return null;
+        }
+
+
+        public Usuario GenerarEmail(Usuario u)
+        {
+            int cont = 0;
+            string inicioMail = u.Nombre.Substring(0, Math.Min(3, u.Nombre.Length)) + u.Apellido.Substring(0, Math.Min(3, u.Apellido.Length));
+            u.Email = inicioMail + "@laEmpresa.com";
+
+            while (_usuarios.Contains(u))
+            {
+                cont++;
+                u.Email = inicioMail + cont + "@laEmpresa.com";
+            }
+
+            return u;
         }
 
 
@@ -174,8 +193,8 @@ namespace Dominio
 
             // Instancias reutilizables (usan los equipos de arriba)
             Usuario u1 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2024, 03, 12));
-            Usuario u2 = new Usuario("Bruno", "López", "PassSegura1", eFrontend, new DateTime(2024, 05, 03));
-            Usuario u3 = new Usuario("Camila", "Suárez", "PassSegura1", eFrontend, new DateTime(2023, 11, 21));
+            Usuario u2 = new Usuario("Bruno", "Rodriguez", "PassSegura1", eFrontend, new DateTime(2024, 05, 03));
+            Usuario u3 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2023, 11, 21));
             Usuario u4 = new Usuario("Diego", "Pereyra", "PassSegura1", eFrontend, new DateTime(2023, 09, 15));
             Usuario u5 = new Usuario("Eva", "García", "PassSegura1", eFrontend, new DateTime(2024, 02, 02));
 

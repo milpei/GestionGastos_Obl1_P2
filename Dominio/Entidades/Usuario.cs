@@ -4,11 +4,11 @@ namespace Dominio.Entidades
 {
     public class Usuario
     {
-        private string _email = "";
+
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
-        public string Email { get; }
+        public string Email { get; set; }
         public Equipo Equipo { get; set; }
         public DateTime FIncorporacion { get; set; }
 
@@ -19,7 +19,7 @@ namespace Dominio.Entidades
             Contrasenia = contra;
             Equipo = equipo;
             FIncorporacion = fechaIncorporacion;
-            _email = GenerarEmail();
+            
         }
 
         public override string ToString()
@@ -70,7 +70,7 @@ namespace Dominio.Entidades
         }
 
 
-
+        /*
         private string GenerarEmail() // Esta debe devolver string porque el constructor precisa qwue le devuelvas un dato para el asignarselo a el atributo.
         {
             return Nombre.Substring(0, Math.Min(3, Nombre.Length)) + Apellido.Substring(0, Math.Min(3, Apellido.Length)) + "@laEmpresa.com";
@@ -86,7 +86,7 @@ namespace Dominio.Entidades
             _email = Nombre.Substring(0, Math.Min(3, Nombre.Length)) + Apellido.Substring(0, Math.Min(3, Nombre.Length)) + numMail + "@laEmpresa.com";
         }
 
-        /*
+        
        En substring el primer numero indica la posicion y el segundo cuantos caracteres (0,3) = tres caracteres contando desde 0;
        Si escribimos Substring(x) va desde x hasta el final
 

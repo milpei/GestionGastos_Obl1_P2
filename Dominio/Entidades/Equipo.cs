@@ -34,7 +34,7 @@ namespace Dominio.Entidades
         {
             Equipo e = obj as Equipo;
 
-            if (e.Nombre == Nombre) return true;
+            if (e.Nombre.ToLower() == Nombre.ToLower()) return true;
 
             return false;
         }

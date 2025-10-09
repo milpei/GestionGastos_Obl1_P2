@@ -10,29 +10,33 @@ namespace GestionGastos_Obl1_P2
 
             Sistema s = new Sistema();
 
-            bool flag = true;
+            bool flag1 = true;
+            int opcion = 0;
 
-            while (flag)
+            while (flag1)
             {
-                MostrarOpciones();
-                if (!int.TryParse(Console.ReadLine(), out int opcion)) Console.WriteLine("Se debe ingresar un numero");
-                Console.Clear();
-
                 switch (opcion)
                 {
                     case 0:
-                        flag = false;
+                        Console.Clear();
+                        MostrarOpciones();
+                        if (!int.TryParse(Console.ReadLine(), out opcion)) Console.WriteLine("Se debe ingresar un numero");
                         break;
 
                     case 1:
+                        Console.Clear();
                         foreach (Usuario u in s.Usuarios)
                         {
                             Console.WriteLine(u.Nombre, u.Email, u.Equipo.ToString());
                         }
+                            Console.ReadKey();
+                            Console.Clear();
+                            opcion = 0;
 
                         break;
 
                     case 2:
+                        Console.Clear();
                         Console.WriteLine("Ingrese el Email que desea buscar");
                         string email = Console.ReadLine();
 
@@ -42,21 +46,25 @@ namespace GestionGastos_Obl1_P2
                         {
                             Console.WriteLine(p.ToString());
                         }
-
+                        Console.ReadKey();
+                        Console.Clear();
+                        opcion = 0;
                         break;
 
                     case 3:
+                        Console.Clear();
                         Console.WriteLine("Ingrese el nombre de su nuevo usuario");
                         string nombre = Console.ReadLine();
                         Console.Clear();
                         Console.WriteLine("Ingrese el apellido de su nuevo usuario");
                         string apellido = Console.ReadLine();
                         Console.Clear();
-                        Console.WriteLine("Ingrese su contraseña");
+                        Console.WriteLine("Ingrese su contraseña (al menos 8 caracteres)");
                         string contra = Console.ReadLine();
                         Console.Clear();
                         Console.WriteLine("Ingrese el nombre de su equipo");
-                        while (flag)
+                        bool flag2 = true;
+                        while (flag2)
                         {
                             foreach (Equipo e in s.Equipos)
                             {
@@ -68,32 +76,57 @@ namespace GestionGastos_Obl1_P2
                             if (s.BuscarEquipoPorNom(nomEquipo) != null)
                             {
 
-                                flag = false;
+                                flag2 = false;
                                 Usuario nuevoUsuario = new Usuario(nombre, apellido, contra, s.BuscarEquipoPorNom(nomEquipo), DateTime.Now);
                                 s.AgregarUsuario(nuevoUsuario);
+                                Console.WriteLine("El usuario se agregó correctamente.");
                                 break;
                             }
                             else
                             {
                                 Console.WriteLine("El equipo no existe ingreselo de nuevo");
                             }
-
-
                         }
-
+                        Console.ReadKey();
+                        Console.Clear();
+                        opcion = 0;
                         break;
 
                     case 4:
-                        Console.WriteLine("Ingrese el nombre del equipo");
-                        string nombreDeEquipo = Console.ReadLine();
-
-                        List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
-
-                        foreach (Usuario u in integrantesEquipo)
+                        Console.Clear();
+                        bool flag3 = true;
+                        while (flag3)
                         {
-                            Console.WriteLine(u.Nombre, u.Email);
-                        }
+                            Console.WriteLine("Ingrese el nombre del equipo");
+                            foreach (Equipo e in s.Equipos)
+                            {
+                                Console.WriteLine(e.Nombre);
+                            }
+                            string nombreDeEquipo = Console.ReadLine();
 
+                            List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
+
+                            if (s.BuscarEquipoPorNom(nombreDeEquipo) == null)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("El equipo no existe, ingreselo nuevamente");
+                                Console.ReadKey();
+                                Console.Clear();
+                                opcion = 4;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                foreach (Usuario u in integrantesEquipo)
+                                {
+                                    Console.WriteLine(u.Nombre, u.Email);
+                                }
+                                flag3 = false;
+                            }
+                        }
+                        Console.ReadKey();
+                        Console.Clear();
+                        opcion = 0;
                         break;
 
                     case 5:
@@ -161,6 +194,10 @@ namespace GestionGastos_Obl1_P2
 
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
                         break;
+
+                    case 99:
+                        flag1 = false;
+                        break;
                 }
             }
         }
@@ -168,13 +205,14 @@ namespace GestionGastos_Obl1_P2
 
         public static void MostrarOpciones()
         {
-            Console.WriteLine("0 - Salir");
+            Console.WriteLine("0 - Menú");
             Console.WriteLine("1 - Mostrar listado de todos los usuarios");
             Console.WriteLine("2 - Dado un correo de usuario listar todos los pagos que realizó ese usuario");
             Console.WriteLine("3 - Alta de un usuario");
             Console.WriteLine("4 - Mostrar usuarios pertenecientes al equipo");
             Console.WriteLine("5 - Agregar pago Recurrente");
             Console.WriteLine("6 - Agregar pago Unico");
+            Console.WriteLine("99 - Salir");
         }
 
 

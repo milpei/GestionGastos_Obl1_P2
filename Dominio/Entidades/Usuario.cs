@@ -70,27 +70,9 @@ namespace Dominio.Entidades
         }
 
 
-        /*
-        private string GenerarEmail() // Esta debe devolver string porque el constructor precisa qwue le devuelvas un dato para el asignarselo a el atributo.
-        {
-            return Nombre.Substring(0, Math.Min(3, Nombre.Length)) + Apellido.Substring(0, Math.Min(3, Apellido.Length)) + "@laEmpresa.com";
-            //Math.Min(x,y) compara los valores y me devuelve el mas chico, entonces, si el nombre es menor a 3 Substring me devuelve el total del nombre.
-        }
-
-           public void CambiarEmail() 
-        {
-            Random numRandom = new Random();
-            int numMail = numRandom.Next(1, 100);
-            //esta combinacion de Random y Next me devueklve un num entre los valores indicados, en este caso entre 1 y 99.
-
-            _email = Nombre.Substring(0, Math.Min(3, Nombre.Length)) + Apellido.Substring(0, Math.Min(3, Nombre.Length)) + numMail + "@laEmpresa.com";
-        }
-
         
-       En substring el primer numero indica la posicion y el segundo cuantos caracteres (0,3) = tres caracteres contando desde 0;
-       Si escribimos Substring(x) va desde x hasta el final
 
-       */
+       
 
         
         public override bool Equals(object obj)

@@ -74,7 +74,7 @@ namespace Dominio
         {
             foreach (Equipo e in _equipos)
             {
-                if (e.Nombre == nomEquipo) return e;
+                if (e.Nombre.ToLower() == nomEquipo.ToLower()) return e;
             }
 
             return null;
@@ -88,7 +88,7 @@ namespace Dominio
 
             foreach (Pago p in _pagos)
             {
-                if (p.Usuario.Email == email) ret.Add(p);
+                if (p.Usuario.Email.ToLower() == email.ToLower()) ret.Add(p);
             }
             return ret;
         }
@@ -102,7 +102,7 @@ namespace Dominio
 
             foreach (Usuario u in _usuarios)
             {
-                if (u.Equipo.Nombre == nombreDeEquipo) ret.Add(u);
+                if (u.Equipo.Nombre.ToLower() == nombreDeEquipo.ToLower()) ret.Add(u);
             }
 
             return ret;

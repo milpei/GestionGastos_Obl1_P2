@@ -195,6 +195,7 @@ namespace Dominio
             Usuario u1 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2024, 03, 12));
             Usuario u2 = new Usuario("Bruno", "Rodriguez", "PassSegura1", eFrontend, new DateTime(2024, 05, 03));
             Usuario u3 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2023, 11, 21));
+            
             Usuario u4 = new Usuario("Diego", "Pereyra", "PassSegura1", eFrontend, new DateTime(2023, 09, 15));
             Usuario u5 = new Usuario("Eva", "García", "PassSegura1", eFrontend, new DateTime(2024, 02, 02));
 
@@ -228,6 +229,7 @@ namespace Dominio
             {
                 AgregarUsuario(u);
             }
+
 
 
             List<Pago> _pagosPrecarga = new List<Pago>

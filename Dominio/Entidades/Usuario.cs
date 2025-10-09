@@ -97,7 +97,7 @@ namespace Dominio.Entidades
         {
             Usuario u = obj as Usuario;
 
-            if (u.Email == _email) return true;
+            if (this.Email == u.Email) return true;
 
             return false;
         }

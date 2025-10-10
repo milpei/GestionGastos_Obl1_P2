@@ -20,11 +20,7 @@ namespace Dominio.Entidades
             FFin = fechaFin;
         }
 
-        public override string ToString()
-        {
-            return base.ToString() + $" Monto total: {MontoFinal}, Pagos pendientes: {MostrarCuotasORecurrente()}";
-        }
-
+       
         
         protected decimal Recargo() 
         {
@@ -88,5 +84,11 @@ namespace Dominio.Entidades
             return iniciaAntes && terminaDespues;
 
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Monto total: {MontoFinal}, Pagos pendientes: {MostrarCuotasORecurrente()}";
+        }
+
     }
 }

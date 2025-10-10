@@ -10,18 +10,12 @@ namespace Dominio.Entidades
     {
         public DateTime FPago { get; set; }
         public string NumRecibo { get; set; }
-
         public decimal MontoFinal { get => CalcularMontoFinal(); }
 
         public Unico(DateTime fechaPago, string numeroRecibo, MetodosDePago metodoPago, TipoDeGasto tipoGasto, Usuario usuario, string descripcion, decimal monto) : base(metodoPago, tipoGasto, usuario, descripcion, monto)
         {
             FPago = fechaPago;
             NumRecibo = numeroRecibo;
-        }
-
-        public override string ToString()
-        {
-            return base.ToString() + $" Monto total: {MontoFinal}";
         }
 
        
@@ -61,8 +55,11 @@ namespace Dominio.Entidades
         public override bool EsDelMesX(DateTime fecha)
         {
             return FPago.Month == fecha.Month && FPago.Year == fecha.Year; 
+        }
 
-            
+        public override string ToString()
+        {
+            return base.ToString() + $" Monto total: {MontoFinal}";
         }
 
 

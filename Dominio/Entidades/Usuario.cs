@@ -22,10 +22,7 @@ namespace Dominio.Entidades
             
         }
 
-        public override string ToString()
-        {
-            return $"Nombre:{Nombre}, Apellido {Apellido}, Contraseña {Contrasenia}, Email{Email}, Equipo: {Equipo}, Fecha de incorporacion: {FIncorporacion}";
-        }
+        
 
         public void Validar() 
         {
@@ -70,11 +67,11 @@ namespace Dominio.Entidades
         }
 
 
-        
+        public override string ToString()
+        {
+            return $"Nombre:{Nombre}, Apellido {Apellido}, Contraseña {Contrasenia}, Email{Email}, Equipo: {Equipo}, Fecha de incorporacion: {FIncorporacion}";
+        }
 
-       
-
-        
         public override bool Equals(object obj)
         {
             Usuario u = obj as Usuario;

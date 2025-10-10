@@ -33,11 +33,6 @@ namespace Dominio.Entidades
         public TipoDeGasto() { }
 
 
-        public override string ToString()
-        {
-            return $"Nombre: {_nombre}, Descripcion: {_descripcion}";
-        }
-
 
         public void Validar() 
         {
@@ -53,6 +48,11 @@ namespace Dominio.Entidades
         private void validarDesc()
         { 
             if (string.IsNullOrEmpty(Descripcion)) throw new Exception("La descripcion no puede ser vacia");
+        }
+
+        public override string ToString()
+        {
+            return $"Nombre: {_nombre}, Descripcion: {_descripcion}";
         }
 
         public override bool Equals(object obj)

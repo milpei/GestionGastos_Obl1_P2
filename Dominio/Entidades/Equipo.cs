@@ -20,14 +20,20 @@ namespace Dominio.Entidades
             _id = ++s_UltId; 
         }
 
-        public override string ToString()
-        {
-            return $"Nombre Equipo: {Nombre}, ID: {_id}" ;
-        }
 
         public void Validar()
         {
+            ValidarNom();
+        }
+
+        private void ValidarNom()
+        {
             if (string.IsNullOrEmpty(Nombre)) throw new Exception("El nombre no puede ser vacio");
+        }
+
+        public override string ToString()
+        {
+            return $"Nombre Equipo: {Nombre}, ID: {_id}" ;
         }
 
         public override bool Equals(object obj)

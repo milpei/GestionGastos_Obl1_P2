@@ -19,16 +19,26 @@ namespace GestionGastos_Obl1_P2
                 {
                     case 0:
                         Console.Clear();
+                        Console.WriteLine("Se debe ingresar un numero del menú");
                         MostrarOpciones();
-                        if (!int.TryParse(Console.ReadLine(), out opcion)) Console.WriteLine("Se debe ingresar un numero");
+                        int.TryParse(Console.ReadLine(), out opcion);
+
                         break;
 
                     case 1:
                         Console.Clear();
-                        foreach (Usuario u in s.Usuarios)
+
+                        if (s.Usuarios.Count == 0)
                         {
-                            Console.WriteLine($"{u.Nombre}, {u.Email}, {u.Equipo.Nombre}");
+                            Console.WriteLine("No existen usuarios registrados");
                         }
+                        else
+                        {
+                            foreach (Usuario u in s.Usuarios)
+                            {
+                                Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}, {u.Equipo.Nombre}");
+                            }
+                        } 
                         Console.ReadKey();
                         Console.Clear();
                         opcion = 0;
@@ -41,11 +51,18 @@ namespace GestionGastos_Obl1_P2
                         string email = Console.ReadLine();
 
                         List<Pago> pagosUsuario = s.PagosPorUsuario(email);
-
-                        foreach (Pago p in pagosUsuario)
+                        if (pagosUsuario.Count == 0 )
                         {
-                            Console.WriteLine(p.ToString());
+                            Console.WriteLine("Este usuario no realizó ningún pago");
                         }
+                        else
+                        {
+                            foreach (Pago p in pagosUsuario)
+                            {
+                                Console.WriteLine(p.ToString());
+                            }
+                        }
+
                         Console.ReadKey();
                         Console.Clear();
                         opcion = 0;
@@ -98,30 +115,38 @@ namespace GestionGastos_Obl1_P2
                         while (flag3)
                         {
                             Console.WriteLine("Ingrese el nombre del equipo");
-                            foreach (Equipo e in s.Equipos)
-                            {
-                                Console.WriteLine(e.Nombre);
-                            }
-                            string nombreDeEquipo = Console.ReadLine();
 
-                            List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
-
-                            if (s.BuscarEquipoPorNom(nombreDeEquipo) == null)
+                            if (s.Equipos.Count == 0)
                             {
-                                Console.Clear();
-                                Console.WriteLine("El equipo no existe, ingreselo nuevamente");
-                                Console.ReadKey();
-                                Console.Clear();
-                                opcion = 4;
+                                Console.WriteLine("No hay equipos registrados");
                             }
                             else
                             {
-                                Console.Clear();
-                                foreach (Usuario u in integrantesEquipo)
+                                foreach (Equipo e in s.Equipos)
                                 {
-                                    Console.WriteLine($"{u.Nombre}, {u.Email}");
+                                    Console.WriteLine(e.Nombre);
                                 }
-                                flag3 = false;
+                                string nombreDeEquipo = Console.ReadLine();
+
+                                List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
+
+                                if (s.BuscarEquipoPorNom(nombreDeEquipo) == null)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("El equipo no existe, ingreselo nuevamente");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    opcion = 4;
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    foreach (Usuario u in integrantesEquipo)
+                                    {
+                                        Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}");
+                                    }
+                                    flag3 = false;
+                                }
                             }
                         }
                         Console.ReadKey();
@@ -217,8 +242,16 @@ namespace GestionGastos_Obl1_P2
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
                         break;
 
+
                     case 99:
                         flag1 = false;
+                        break;
+
+                    default:
+                        Console.Clear();
+                        MostrarOpciones();
+                        int.TryParse(Console.ReadLine(), out opcion);
+
                         break;
                 }
             }
@@ -233,8 +266,6 @@ namespace GestionGastos_Obl1_P2
             Console.WriteLine("3 - Alta de un usuario");
             Console.WriteLine("4 - Mostrar usuarios pertenecientes al equipo");
             Console.WriteLine("5 - Ver pagos del mes actual");
-            Console.WriteLine("6 - Agregar pago Unico");
-            Console.WriteLine("7 - Agregar pago Recurrente");
             Console.WriteLine("99 - Salir");
         }
 

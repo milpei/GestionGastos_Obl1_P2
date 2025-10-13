@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,9 @@ namespace Dominio.Entidades
         {
             if (FFin == DateTime.MinValue) return 0; // si da esto es porque no tiene fecha de fin y es recurrente.
 
-            int cuotasOMeses = ((FFin.Year - FInicio.Year) * 12) + FFin.Month - FInicio.Month;
+            TimeSpan diferenciaEnDias = FFin - FInicio;
+
+            int cuotasOMeses = diferenciaEnDias.Days / 30;
 
             return cuotasOMeses;
         }
@@ -70,7 +73,10 @@ namespace Dominio.Entidades
         {
             if (FFin == DateTime.MinValue) return "Recurrente";
 
-            int cuotasPendientes = ((FFin.Year - DateTime.Today.Year) * 12) + FFin.Month - DateTime.Today.Month; // No incluye la cuota del mes actual, para incluirla +1
+            //int cuotasPendientes = ((FFin.Year - DateTime.Today.Year) * 12) + FFin.Month - DateTime.Today.Month; // No incluye la cuota del mes actual, para incluirla +1
+            TimeSpan diferenciaEnDias = FFin - DateTime.Now;
+
+            int cuotasPendientes = diferenciaEnDias.Days / 30;
 
             return cuotasPendientes.ToString();
         }

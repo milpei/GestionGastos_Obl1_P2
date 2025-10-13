@@ -72,12 +72,18 @@ namespace Dominio
         {
             if (string.IsNullOrEmpty(email)) throw new Exception("El email no puede se vacío");
 
+            Usuario u = ObtenerUsuarioPorMail(email);
+
+            if (!Usuarios.Contains(u)) throw new Exception("El usuario no existe");
+            
+
             List<Pago> ret = new List<Pago>();
 
             foreach (Pago p in _pagos)
             {
                 if (p.Usuario.Email.ToLower() == email.ToLower()) ret.Add(p);
             }
+
             return ret;
         }
 
@@ -109,7 +115,7 @@ namespace Dominio
         {
             foreach (Usuario u in _usuarios)
             {
-                if (u.Email == email) return u;
+                if (u.Email.ToLower() == email.ToLower()) return u;
             }
             return null;
         }

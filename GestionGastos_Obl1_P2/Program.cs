@@ -11,23 +11,22 @@ namespace GestionGastos_Obl1_P2
             Sistema s = new Sistema();
 
             bool flag1 = true;
-            int opcion = 0;
 
             while (flag1)
             {
-                switch (opcion)
+                Console.Clear();
+                Console.WriteLine("Se debe ingresar un numero del menú");
+                MostrarOpciones();
+                //Lo manejo con las teclas directamente
+                ConsoleKeyInfo opcion = Console.ReadKey(intercept: true);
+
+                //.Key para especificar que quiero el dato key de el tipo de dato ConsoleKeyInfo.
+                switch (opcion.Key)
                 {
-                    case 0:
+
+                    case ConsoleKey.D1:
+
                         Console.Clear();
-                        Console.WriteLine("Se debe ingresar un numero del menú");
-                        MostrarOpciones();
-                        int.TryParse(Console.ReadLine(), out opcion);
-
-                        break;
-
-                    case 1:
-                        Console.Clear();
-
                         if (s.Usuarios.Count == 0)
                         {
                             Console.WriteLine("No existen usuarios registrados");
@@ -38,141 +37,187 @@ namespace GestionGastos_Obl1_P2
                             {
                                 Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}, {u.Equipo.Nombre}");
                             }
-                        } 
+                        }
+                        Console.WriteLine("");
+                        Console.WriteLine("Presione cualquier tecla para salír.");
                         Console.ReadKey();
-                        opcion = 0;
+
 
                         break;
 
-                    case 2:
-                        Console.Clear();
-                        Console.WriteLine("Ingrese el Email que desea buscar");
-                        string email = Console.ReadLine();
+                    case ConsoleKey.D2:
 
-                        List<Pago> pagosUsuario = s.PagosPorUsuario(email);
-                        if (pagosUsuario.Count == 0 )
-                        {
-                            Console.WriteLine("Este usuario no realizó ningún pago");
-                        }
-                        else
-                        {
-                            foreach (Pago p in pagosUsuario)
-                            {
-                                Console.WriteLine(p.ToString());
-                            }
-                        }
-
-                        Console.ReadKey();
-                        opcion = 0;
-                        break;
-
-                    case 3:
-                        Console.Clear();
-                        Console.WriteLine("Ingrese el nombre de su nuevo usuario");
-                        string nombre = Console.ReadLine();
-                        Console.Clear();
-                        Console.WriteLine("Ingrese el apellido de su nuevo usuario");
-                        string apellido = Console.ReadLine();
-                        Console.Clear();
-                        Console.WriteLine("Ingrese su contraseña (al menos 8 caracteres)");
-                        string contra = Console.ReadLine();
-                        bool flag2 = true;
-                        while (flag2)
+                        bool error1 = true;
+                        while (error1)
                         {
                             Console.Clear();
-                            Console.WriteLine("Ingrese el nombre de su equipo");
-                            foreach (Equipo e in s.Equipos)
+                            try
                             {
-                                Console.WriteLine(e.Nombre);
+                                Console.WriteLine("Ingrese el Email que desea buscar");
+                                string email = Console.ReadLine();
+
+                                List<Pago> pagosUsuario = s.PagosPorUsuario(email);
+                                if (pagosUsuario.Count == 0)
+                                {
+                                    Console.WriteLine("Este usuario no realizó ningún pago");
+                                }
+                                else
+                                {
+                                    foreach (Pago p in pagosUsuario)
+                                    {
+                                        Console.WriteLine(p.ToString());
+                                    }
+                                }
+                                error1 = false;
                             }
-
-                            string nomEquipo = Console.ReadLine();
-
-                            if (s.BuscarEquipoPorNom(nomEquipo) != null)
+                            catch (Exception ex)
                             {
-
-                                flag2 = false;
-                                Usuario nuevoUsuario = new Usuario(nombre, apellido, contra, s.BuscarEquipoPorNom(nomEquipo), DateTime.Now);
-                                s.AgregarUsuario(nuevoUsuario);
-                                Console.WriteLine("El usuario se agregó correctamente.");
-                                break;
+                                Console.Clear();
+                                Console.WriteLine(ex.Message);
                             }
-                            else
-                            {
-                                Console.WriteLine("El equipo no existe ingreselo de nuevo");
-                            }
+                            Console.WriteLine("");
+                            Console.WriteLine("Presione cualquier tecla para continuar");
+                            Console.ReadKey();
                         }
-                        Console.ReadKey();
-                        opcion = 0;
+
                         break;
 
-                    case 4:
-                        Console.Clear();
-                        bool flag3 = true;
-                        while (flag3)
+                    case ConsoleKey.D3:
+
+                        bool error2 = true;
+                        while (error2)
                         {
+                            Console.Clear();
+                            try
+                            {
+
+                                Console.Clear();
+                                Console.WriteLine("Ingrese el nombre de su nuevo usuario");
+                                string nombre = Console.ReadLine();
+                                Console.Clear();
+                                Console.WriteLine("Ingrese el apellido de su nuevo usuario");
+                                string apellido = Console.ReadLine();
+                                Console.Clear();
+                                Console.WriteLine("Ingrese su contraseña (al menos 8 caracteres)");
+                                string contra = Console.ReadLine();
+
+                                Console.Clear();
+                                Console.WriteLine("Ingrese el nombre de su equipo");
+                                foreach (Equipo e in s.Equipos)
+                                {
+                                    Console.WriteLine(e.Nombre);
+                                }
+
+                                string nomEquipo = Console.ReadLine();
+
+                                if (s.BuscarEquipoPorNom(nomEquipo) != null)
+                                {
+
+                                    Usuario nuevoUsuario = new Usuario(nombre, apellido, contra, s.BuscarEquipoPorNom(nomEquipo), DateTime.Now);
+                                    s.AgregarUsuario(nuevoUsuario);
+                                    Console.WriteLine("El usuario se agregó correctamente.");
+                                    error2 = false;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El equipo no existe ingreselo de nuevo");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("");
+                                Console.WriteLine(ex.Message);
+
+                            }
+                            Console.WriteLine("");
+                            Console.WriteLine("Presione cualquier tecla para continuar");
+                            Console.ReadKey();
+                        }
+
+                        break;
+
+                    case ConsoleKey.D4:
+
+                        bool error3 = true;
+                        while (error3)
+                        {
+                            Console.Clear();
+
                             Console.WriteLine("Ingrese el nombre del equipo");
 
                             if (s.Equipos.Count == 0)
                             {
                                 Console.WriteLine("No hay equipos registrados");
                             }
-                            else
+
+                            try
                             {
-                                foreach (Equipo e in s.Equipos)
                                 {
-                                    Console.WriteLine(e.Nombre);
-                                }
-                                string nombreDeEquipo = Console.ReadLine();
+                                    foreach (Equipo e in s.Equipos)
+                                    {
+                                        Console.WriteLine(e.Nombre);
+                                    }
+                                    string nombreDeEquipo = Console.ReadLine();
+                                    Console.Clear();
 
-                                List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
+                                    List<Usuario> integrantesEquipo = s.IntegrantesEquipo(nombreDeEquipo);
 
-                                if (s.BuscarEquipoPorNom(nombreDeEquipo) == null)
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("El equipo no existe, ingreselo nuevamente");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    opcion = 4;
-                                }
-                                else
-                                {
-                                    Console.Clear();
                                     foreach (Usuario u in integrantesEquipo)
                                     {
                                         Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}, {u.Equipo.Nombre}");
                                     }
-                                    flag3 = false;
+
+                                    error3 = false;
                                 }
                             }
-                        }
-                        Console.ReadKey();
-                        Console.Clear();
-                        opcion = 0;
-                        break;
-
-                    case 5:
-                        Console.Clear();
-                        List<Pago> pagosDeEsteMes = s.PagosMesX(DateTime.Now);
-
-                        if (pagosDeEsteMes.Count == 0)
-                        {
-                            Console.WriteLine("No hay pagos en este mes");
-                        }
-                        else
-                        {
-                            foreach (Pago p in pagosDeEsteMes)
+                            catch (Exception ex)
                             {
-                                Console.WriteLine(p);
+                                Console.WriteLine("");
+                                Console.WriteLine(ex.Message); 
                             }
+                            Console.WriteLine("");
+                            Console.WriteLine("Presione cualquier tecla para continuar");
+                            Console.ReadKey();
                         }
 
-                        Console.ReadKey();
-                        opcion = 0;
+                        break;
+
+                    case ConsoleKey.D5:
+
+                        bool error4 = true;
+                        while (error4)
+                        {
+                            Console.Clear();
+
+                            try 
+                            {
+                                List<Pago> pagosDeEsteMes = s.PagosMesX(DateTime.Now);
+
+                                if (pagosDeEsteMes.Count == 0)
+                                {
+                                    Console.WriteLine("No hay pagos en este mes");
+                                }
+
+                                    foreach (Pago p in pagosDeEsteMes)
+                                    {
+                                        Console.WriteLine(p);
+                                    }
+
+                                error4 = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("");
+                                Console.WriteLine(ex.Message);
+                            }
+                            Console.WriteLine("");
+                            Console.WriteLine("Presione cualquier tecla para continuar");
+                            Console.ReadKey();
+                        }
                         break;
 
 
-                    case 6:
+                    case ConsoleKey.D6:
                         Console.WriteLine("Ingrese una fecha del pago dd/mm/aaaa");
                         DateTime.TryParse(Console.ReadLine(), out DateTime fPago);
 
@@ -205,7 +250,7 @@ namespace GestionGastos_Obl1_P2
                         //Creo que hay que validar aca, que la finicio.month != fFin.month y que el metodo >= 0 && <= 2
                         break;
 
-                    case 7:
+                    case ConsoleKey.D7:
                         Console.WriteLine("Ingrese una fecha de inicio dd/mm/aaaa");
                         DateTime.TryParse(Console.ReadLine(), out DateTime fInicio);
 
@@ -239,16 +284,10 @@ namespace GestionGastos_Obl1_P2
                         break;
 
 
-                    case 99:
+                    case ConsoleKey.Escape:
                         flag1 = false;
                         break;
 
-                    default:
-                        Console.Clear();
-                        MostrarOpciones();
-                        int.TryParse(Console.ReadLine(), out opcion);
-
-                        break;
                 }
             }
         }
@@ -256,13 +295,13 @@ namespace GestionGastos_Obl1_P2
 
         public static void MostrarOpciones()
         {
-            Console.WriteLine("0 - Menú");
+            //Console.WriteLine("0 - Menú");
             Console.WriteLine("1 - Mostrar listado de todos los usuarios");
             Console.WriteLine("2 - Dado un correo de usuario listar todos los pagos que realizó ese usuario");
             Console.WriteLine("3 - Alta de un usuario");
             Console.WriteLine("4 - Mostrar usuarios pertenecientes al equipo");
             Console.WriteLine("5 - Ver pagos del mes actual");
-            Console.WriteLine("99 - Salir");
+            Console.WriteLine("Esc - Salir");
         }
 
 

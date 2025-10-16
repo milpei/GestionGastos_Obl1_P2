@@ -1,5 +1,4 @@
 ﻿using Dominio.Entidades;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio
 {
@@ -24,7 +23,7 @@ namespace Dominio
             _tiposDeGasto = new List<TipoDeGasto>();
 
             PrecargarDatos();
-            
+
         }
 
 
@@ -75,7 +74,7 @@ namespace Dominio
             Usuario u = ObtenerUsuarioPorMail(email);
 
             if (!Usuarios.Contains(u)) throw new Exception("El usuario no existe");
-            
+
 
             List<Pago> ret = new List<Pago>();
 
@@ -124,23 +123,27 @@ namespace Dominio
         public Usuario GenerarEmail(Usuario u)
         {
             int cont = 0;
-            string inicioMail = u.Nombre.Substring(0, Math.Min(3, u.Nombre.Length)) + u.Apellido.Substring(0, Math.Min(3, u.Apellido.Length));
-            u.Email = inicioMail + "@laEmpresa.com";
+            string nom = u.Nombre.Substring(0, Math.Min(3, u.Nombre.Length));
+            string ape = u.Apellido.Substring(0, Math.Min(3, u.Apellido.Length));
+            string inicioMail = nom + ape;
+            u.Email = inicioMail.ToLower() + "@laEmpresa.com";
 
-            while (_usuarios.Contains(u))
+            foreach (Usuario us in _usuarios)
             {
-                cont++;
-                u.Email = inicioMail + cont + "@laEmpresa.com";
+                if((nom.ToLower() == us.Nombre.Substring(0, Math.Min(3, us.Nombre.Length)).ToLower()) && ape.ToLower() == us.Apellido.Substring(0, Math.Min(3, us.Apellido.Length)).ToLower()) cont++;
             }
+
+            if (cont > 0) u.Email = inicioMail.ToLower() + cont + "@laEmpresa.com";
 
             return u;
         }
+        //LO CAMBIE, CHEQUEAR Y ACTUALIZAR
 
         public List<Pago> PagosMesX(DateTime fecha)
         {
             List<Pago> pagosMesX = new List<Pago>();
 
-            foreach(Pago p in _pagos)
+            foreach (Pago p in _pagos)
             {
                 if (p.EsDelMesX(fecha)) pagosMesX.Add(p);
             }
@@ -194,34 +197,34 @@ namespace Dominio
                 AgregarTipoDeGasto(t);
             }
 
-
+            //AGREGAR UN USUARIO CON UN NOMBRE DE 2 O UNA LETRA.
             // Instancias reutilizables (usan los equipos de arriba)
-            Usuario u1 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2024, 03, 12));
-            Usuario u2 = new Usuario("Bruno", "Rodriguez", "PassSegura1", eFrontend, new DateTime(2024, 05, 03));
-            Usuario u3 = new Usuario("Ana", "Pérez", "PassSegura1", eFrontend, new DateTime(2023, 11, 21));
-            
-            Usuario u4 = new Usuario("Diego", "Pereyra", "PassSegura1", eFrontend, new DateTime(2023, 09, 15));
-            Usuario u5 = new Usuario("Eva", "García", "PassSegura1", eFrontend, new DateTime(2024, 02, 02));
+            Usuario u1 = new Usuario("Ana", "Perez", "PassSegura1", eFrontend, new DateTime(2024, 03, 12));
+            Usuario u2 = new Usuario("bruno", "Rodriguez", "PassSegura2", eFrontend, new DateTime(2024, 05, 03));
+            Usuario u3 = new Usuario("Ana", "Perez", "PassSegura3", eFrontend, new DateTime(2023, 11, 21));
 
-            Usuario u6 = new Usuario("Facundo", "Silva", "PassSegura1", eBackend, new DateTime(2023, 12, 05));
-            Usuario u7 = new Usuario("Gabriel", "Ramos", "PassSegura1", eBackend, new DateTime(2024, 04, 18));
-            Usuario u8 = new Usuario("Helena", "Méndez", "PassSegura1", eBackend, new DateTime(2023, 10, 09));
-            Usuario u9 = new Usuario("Iván", "Castro", "PassSegura1", eBackend, new DateTime(2024, 01, 27));
-            Usuario u10 = new Usuario("Julia", "Morales", "PassSegura1", eBackend, new DateTime(2023, 08, 30));
-            Usuario u11 = new Usuario("Kevin", "Sosa", "PassSegura1", eBackend, new DateTime(2024, 06, 06));
+            Usuario u4 = new Usuario("Diego", "Pereyra", "PassSegura4", eFrontend, new DateTime(2023, 09, 15));
+            Usuario u5 = new Usuario("yi", "Garcia", "PassSegura5", eFrontend, new DateTime(2024, 02, 02));
 
-            Usuario u12 = new Usuario("Lucía", "Fernández", "PassSegura1", eData, new DateTime(2023, 07, 14));
-            Usuario u13 = new Usuario("Matías", "Alonso", "PassSegura1", eData, new DateTime(2024, 03, 08));
-            Usuario u14 = new Usuario("Nicolás", "Vega", "PassSegura1", eData, new DateTime(2024, 02, 25));
-            Usuario u15 = new Usuario("Olivia", "Martínez", "PassSegura1", eData, new DateTime(2023, 11, 03));
-            Usuario u16 = new Usuario("Pablo", "Aguiar", "PassSegura1", eData, new DateTime(2024, 01, 12));
+            Usuario u6 = new Usuario("Agustin", "Tejera", "PassSegura6", eBackend, new DateTime(2023, 12, 05));
+            Usuario u7 = new Usuario("ana", "perez", "PassSegura7", eBackend, new DateTime(2024, 04, 18));
+            Usuario u8 = new Usuario("Helena", "Mendez", "PassSegura8", eBackend, new DateTime(2023, 10, 09));
+            Usuario u9 = new Usuario("Ivan", "Castro", "PassSegura9", eBackend, new DateTime(2024, 01, 27));
+            Usuario u10 = new Usuario("Julia", "Morales", "PassSegura10", eBackend, new DateTime(2023, 08, 30));
+            Usuario u11 = new Usuario("Kevin", "Sosa", "PassSegura11", eBackend, new DateTime(2024, 06, 06));
 
-            Usuario u17 = new Usuario("Rocío", "Pintos", "PassSegura1", eUX, new DateTime(2024, 05, 21));
-            Usuario u18 = new Usuario("Santiago", "Costa", "PassSegura1", eUX, new DateTime(2023, 12, 19));
-            Usuario u19 = new Usuario("Tamara", "De León", "PassSegura1", eUX, new DateTime(2023, 09, 07));
-            Usuario u20 = new Usuario("Ulises", "Piñeyro", "PassSegura1", eUX, new DateTime(2024, 02, 14));
-            Usuario u21 = new Usuario("Valentina", "Cabrera", "PassSegura1", eUX, new DateTime(2024, 06, 01));
-            Usuario u22 = new Usuario("Walter", "Cuevas", "PassSegura1", eUX, new DateTime(2023, 10, 28));
+            Usuario u12 = new Usuario("Lucia", "Fernandez", "PassSegura12", eData, new DateTime(2023, 07, 14));
+            Usuario u13 = new Usuario("Matias", "Alonso", "PassSegura13", eData, new DateTime(2024, 03, 08));
+            Usuario u14 = new Usuario("Nicolas", "Vega", "PassSegura14", eData, new DateTime(2024, 02, 25));
+            Usuario u15 = new Usuario("Olivia", "Martinez", "PassSegura15", eData, new DateTime(2023, 11, 03));
+            Usuario u16 = new Usuario("Pablo", "Aguiar", "PassSegura16", eData, new DateTime(2024, 01, 12));
+
+            Usuario u17 = new Usuario("Rocio", "Pintos", "PassSegura17", eUX, new DateTime(2024, 05, 21));
+            Usuario u18 = new Usuario("Santiago", "Costa", "PassSegura18", eUX, new DateTime(2023, 12, 19));
+            Usuario u19 = new Usuario("Tamara", "De Leon", "PassSegura19", eUX, new DateTime(2023, 09, 07));
+            Usuario u20 = new Usuario("Ulises", "Piñeyro", "PassSegura20", eUX, new DateTime(2024, 02, 14));
+            Usuario u21 = new Usuario("Valentina", "Cabrera", "PassSegura21", eUX, new DateTime(2024, 06, 01));
+            Usuario u22 = new Usuario("Walter", "Cuevas", "PassSegura22", eUX, new DateTime(2023, 10, 28));
 
             // Lista
             List<Usuario> _usuariosPrecarga = new List<Usuario>

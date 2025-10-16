@@ -76,7 +76,7 @@ namespace Dominio.Entidades
         {
             Usuario u = obj as Usuario;
 
-            if (this.Email == u.Email) return true;
+            if (this.Email.ToLower() == u.Email.ToLower()) return true;
 
             return false;
         }

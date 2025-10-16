@@ -59,12 +59,17 @@ namespace Dominio
 
         public Equipo BuscarEquipoPorNom(string nomEquipo)
         {
+            Equipo ret = null;
+
             foreach (Equipo e in _equipos)
             {
-                if (e.Nombre.ToLower() == nomEquipo.ToLower()) return e;
+                if (e.Nombre.ToLower() == nomEquipo.ToLower()) ret = e;
             }
 
-            return null;
+            if (ret == null) throw new Exception("El equipo no existe");
+
+            return ret;
+           
         }
 
         public List<Pago> PagosPorUsuario(string email)
@@ -91,12 +96,16 @@ namespace Dominio
 
             List<Usuario> ret = new List<Usuario>();
 
+            Equipo e = BuscarEquipoPorNom(nombreDeEquipo);
+
+            if (!Equipos.Contains(e)) throw new Exception("El Equipo no existe");
             if (string.IsNullOrEmpty(nombreDeEquipo)) throw new Exception("El nombre no puede ser vacío");
 
             foreach (Usuario u in _usuarios)
             {
                 if (u.Equipo.Nombre.ToLower() == nombreDeEquipo.ToLower()) ret.Add(u);
             }
+
 
             return ret;
         }

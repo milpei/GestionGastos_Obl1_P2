@@ -78,6 +78,8 @@ namespace Dominio.Entidades
 
             int cuotasPendientes = diferenciaEnDias.Days / 30;
 
+            if (cuotasPendientes < 0) cuotasPendientes = 0;
+
             return cuotasPendientes.ToString();
         }
 

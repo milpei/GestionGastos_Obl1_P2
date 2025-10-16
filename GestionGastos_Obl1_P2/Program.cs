@@ -40,7 +40,6 @@ namespace GestionGastos_Obl1_P2
                             }
                         } 
                         Console.ReadKey();
-                        Console.Clear();
                         opcion = 0;
 
                         break;
@@ -64,7 +63,6 @@ namespace GestionGastos_Obl1_P2
                         }
 
                         Console.ReadKey();
-                        Console.Clear();
                         opcion = 0;
                         break;
 
@@ -78,11 +76,11 @@ namespace GestionGastos_Obl1_P2
                         Console.Clear();
                         Console.WriteLine("Ingrese su contraseña (al menos 8 caracteres)");
                         string contra = Console.ReadLine();
-                        Console.Clear();
-                        Console.WriteLine("Ingrese el nombre de su equipo");
                         bool flag2 = true;
                         while (flag2)
                         {
+                            Console.Clear();
+                            Console.WriteLine("Ingrese el nombre de su equipo");
                             foreach (Equipo e in s.Equipos)
                             {
                                 Console.WriteLine(e.Nombre);
@@ -105,7 +103,6 @@ namespace GestionGastos_Obl1_P2
                             }
                         }
                         Console.ReadKey();
-                        Console.Clear();
                         opcion = 0;
                         break;
 
@@ -143,7 +140,7 @@ namespace GestionGastos_Obl1_P2
                                     Console.Clear();
                                     foreach (Usuario u in integrantesEquipo)
                                     {
-                                        Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}");
+                                        Console.WriteLine($"{u.Nombre} {u.Apellido}, {u.Email}, {u.Equipo.Nombre}");
                                     }
                                     flag3 = false;
                                 }
@@ -171,7 +168,6 @@ namespace GestionGastos_Obl1_P2
                         }
 
                         Console.ReadKey();
-                        Console.Clear();
                         opcion = 0;
                         break;
 

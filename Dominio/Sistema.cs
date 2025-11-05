@@ -8,12 +8,21 @@ namespace Dominio
         private List<Equipo> _equipos;
         private List<Pago> _pagos;
         private List<TipoDeGasto> _tiposDeGasto;
+        private static Sistema _instancia;
 
 
         public List<Usuario> Usuarios { get { return new List<Usuario>(_usuarios); } }
         public List<Equipo> Equipos { get { return new List<Equipo>(_equipos); } }
         public List<Pago> Pagos { get { return new List<Pago>(_pagos); } }
         public List<TipoDeGasto> TiposDeGasto { get { return new List<TipoDeGasto>(_tiposDeGasto); } }
+        public static Sistema Instancia
+        {
+            get 
+            {
+                if (_instancia == null) _instancia = new Sistema();
+                return _instancia;
+            }
+        }
 
         public Sistema()
         {
@@ -22,16 +31,16 @@ namespace Dominio
             _pagos = new List<Pago>();
             _tiposDeGasto = new List<TipoDeGasto>();
 
+
             PrecargarDatos();
 
         }
-
+       
 
         public void AgregarUsuario(Usuario u)
         {
             GenerarEmail(u);
             u.Validar();
-            // while (_usuarios.Contains(u));  CON LA NUEVA RESOLUCION CREO QUE HACER ESTO YA NO TIENE SENTIDO. SERIA CHEQUEAR QUE EL MAIL GENERADO NO SEA INCORRECTO.
             _usuarios.Add(u);
         }
 
@@ -69,7 +78,7 @@ namespace Dominio
             if (ret == null) throw new Exception("El equipo no existe");
 
             return ret;
-           
+
         }
 
         public List<Pago> PagosPorUsuario(string email)
@@ -139,7 +148,7 @@ namespace Dominio
 
             foreach (Usuario us in _usuarios)
             {
-                if((nom.ToLower() == us.Nombre.Substring(0, Math.Min(3, us.Nombre.Length)).ToLower()) && ape.ToLower() == us.Apellido.Substring(0, Math.Min(3, us.Apellido.Length)).ToLower()) cont++;
+                if ((nom.ToLower() == us.Nombre.Substring(0, Math.Min(3, us.Nombre.Length)).ToLower()) && ape.ToLower() == us.Apellido.Substring(0, Math.Min(3, us.Apellido.Length)).ToLower()) cont++;
             }
 
             if (cont > 0) u.Email = inicioMail.ToLower() + cont + "@laEmpresa.com";
@@ -309,7 +318,21 @@ namespace Dominio
 
         }
 
+        public Usuario Login(string email, string pwd)
+        {
+            Usuario u = ObtenerUsuarioPorMail(email);
 
+            if (u != null)
+            {
+                if (u.Contrasenia.Equals(pwd))
+                {
+                    return u;
+                }
+            }
+
+            throw new Exception("Datos incorrectos");
+
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿***********************************
 Archivo: Sistema.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Sistema.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Sistema.cs
 ***********************************
 using Dominio.Entidades;
 
@@ -12,12 +12,17 @@ namespace Dominio
         private List<Equipo> _equipos;
         private List<Pago> _pagos;
         private List<TipoDeGasto> _tiposDeGasto;
+        private static Sistema _instancia = new Sistema();
 
 
         public List<Usuario> Usuarios { get { return new List<Usuario>(_usuarios); } }
         public List<Equipo> Equipos { get { return new List<Equipo>(_equipos); } }
         public List<Pago> Pagos { get { return new List<Pago>(_pagos); } }
         public List<TipoDeGasto> TiposDeGasto { get { return new List<TipoDeGasto>(_tiposDeGasto); } }
+        public static Sistema Instancia
+        {
+            get { return _instancia; }
+        }
 
         public Sistema()
         {
@@ -26,16 +31,15 @@ namespace Dominio
             _pagos = new List<Pago>();
             _tiposDeGasto = new List<TipoDeGasto>();
 
+
             PrecargarDatos();
 
         }
-
 
         public void AgregarUsuario(Usuario u)
         {
             GenerarEmail(u);
             u.Validar();
-            // while (_usuarios.Contains(u));  CON LA NUEVA RESOLUCION CREO QUE HACER ESTO YA NO TIENE SENTIDO. SERIA CHEQUEAR QUE EL MAIL GENERADO NO SEA INCORRECTO.
             _usuarios.Add(u);
         }
 
@@ -73,7 +77,7 @@ namespace Dominio
             if (ret == null) throw new Exception("El equipo no existe");
 
             return ret;
-           
+
         }
 
         public List<Pago> PagosPorUsuario(string email)
@@ -143,7 +147,7 @@ namespace Dominio
 
             foreach (Usuario us in _usuarios)
             {
-                if((nom.ToLower() == us.Nombre.Substring(0, Math.Min(3, us.Nombre.Length)).ToLower()) && ape.ToLower() == us.Apellido.Substring(0, Math.Min(3, us.Apellido.Length)).ToLower()) cont++;
+                if ((nom.ToLower() == us.Nombre.Substring(0, Math.Min(3, us.Nombre.Length)).ToLower()) && ape.ToLower() == us.Apellido.Substring(0, Math.Min(3, us.Apellido.Length)).ToLower()) cont++;
             }
 
             if (cont > 0) u.Email = inicioMail.ToLower() + cont + "@laEmpresa.com";
@@ -313,14 +317,48 @@ namespace Dominio
 
         }
 
+        public Usuario Login(string email, string pwd)
+        {
+            Usuario u = ObtenerUsuarioPorMail(email);
 
+            if (u != null)
+            {
+                if (u.Contrasenia.Equals(pwd))
+                {
+                    return u;
+                }
+            }
+
+            throw new Exception("Datos incorrectos");
+
+        }
     }
 }
 
 
 ***********************************
+Archivo: Cargo.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Cargo.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dominio.Entidades
+{
+    public enum Cargo
+    {
+        Gerente,
+        Empleado
+
+    }
+}
+
+***********************************
 Archivo: Equipo.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\Equipo.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Equipo.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -374,7 +412,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: MetodosDePago.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\MetodosDePago.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\MetodosDePago.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -394,7 +432,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: Pago.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\Pago.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Pago.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -463,7 +501,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: Recurrente.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\Recurrente.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Recurrente.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -570,7 +608,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: TipoDeGasto.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\TipoDeGasto.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\TipoDeGasto.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -644,7 +682,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: Unico.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\Unico.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Unico.cs
 ***********************************
 using System;
 using System.Collections.Generic;
@@ -717,7 +755,7 @@ namespace Dominio.Entidades
 
 ***********************************
 Archivo: Usuario.cs
-Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\PRACTICOS\OBLIGATORIO_01\codigo\GestionGastos_Obl1_P2\Dominio\Entidades\Usuario.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\Dominio\Entidades\Usuario.cs
 ***********************************
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -725,13 +763,18 @@ namespace Dominio.Entidades
 {
     public class Usuario
     {
-
+        private Cargo _cargo = Cargo.Empleado;
+         //cargo de prueba
+        
+        public Cargo Cargo { get { return _cargo; } }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
         public string Email { get; set; }
         public Equipo Equipo { get; set; }
         public DateTime FIncorporacion { get; set; }
+
+
 
         public Usuario(string nombre, string apellido, string contra, Equipo equipo, DateTime fechaIncorporacion)
         {
@@ -740,6 +783,7 @@ namespace Dominio.Entidades
             Contrasenia = contra;
             Equipo = equipo;
             FIncorporacion = fechaIncorporacion;
+
             
         }
 
@@ -809,3 +853,143 @@ namespace Dominio.Entidades
     }
 }
 
+
+***********************************
+Archivo: EmpleadoController.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\WebApp\Controllers\EmpleadoController.cs
+***********************************
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApp.Controllers
+{
+    public class EmpleadoController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+
+***********************************
+Archivo: GerenteController.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\WebApp\Controllers\GerenteController.cs
+***********************************
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApp.Controllers
+{
+    public class GerenteController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+
+***********************************
+Archivo: HomeController.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\WebApp\Controllers\HomeController.cs
+***********************************
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using WebApp.Models;
+
+namespace WebApp.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+***********************************
+Archivo: LoginController.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\WebApp\Controllers\LoginController.cs
+***********************************
+using Dominio;
+using Dominio.Entidades;
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApp.Controllers
+{
+    public class LoginController : Controller
+    {
+        Sistema s = Sistema.Instancia;
+
+       
+       
+        public IActionResult Index()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult index(string email, string pwd)
+        {
+            try
+            {
+                Usuario u = s.Login(email, pwd);
+                //Chequeo en s.Login() que no sea null
+
+                if (u.Cargo == Cargo.Empleado)
+                {
+                    HttpContext.Session.SetString("cargo", "empleado");
+                    //no sera mejor guardar el mail? asi guardo los datos de quien ingresó ("email",u.Email)
+                    return RedirectToAction("index","Empleado");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("cargo", "gerente");
+                    return RedirectToAction("index", "Gerente");
+                }
+                
+                
+
+            } catch(Exception ex)
+            {
+                ViewBag.msg = ex.Message;
+                return View();
+                //habria que redireccionarlo al login
+            }
+        }
+
+    }
+}
+
+***********************************
+Archivo: ErrorViewModel.cs
+Carpeta: C:\ORT\2DO SEMESTRE\PROGRAMACION 2\OBLIGATORIO_2\codigo\GestionGastos_Obl2_P2\WebApp\Models\ErrorViewModel.cs
+***********************************
+namespace WebApp.Models
+{
+    public class ErrorViewModel
+    {
+        public string? RequestId { get; set; }
+
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
+}

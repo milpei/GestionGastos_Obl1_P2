@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneradirDeCodigos", "GeneradirDeCodigos\GeneradirDeCodigos.csproj", "{B6D18602-9843-40F6-8770-AECDBCDD8A46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{9BDDBCE0-FD1C-4B99-8FE5-E754E43D439D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B6D18602-9843-40F6-8770-AECDBCDD8A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D18602-9843-40F6-8770-AECDBCDD8A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D18602-9843-40F6-8770-AECDBCDD8A46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BDDBCE0-FD1C-4B99-8FE5-E754E43D439D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BDDBCE0-FD1C-4B99-8FE5-E754E43D439D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BDDBCE0-FD1C-4B99-8FE5-E754E43D439D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BDDBCE0-FD1C-4B99-8FE5-E754E43D439D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

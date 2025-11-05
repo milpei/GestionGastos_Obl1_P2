@@ -4,13 +4,18 @@ namespace Dominio.Entidades
 {
     public class Usuario
     {
-
+        private Cargo _cargo = Cargo.Empleado;
+         //cargo de prueba
+        
+        public Cargo Cargo { get { return _cargo; } }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
         public string Email { get; set; }
         public Equipo Equipo { get; set; }
         public DateTime FIncorporacion { get; set; }
+
+
 
         public Usuario(string nombre, string apellido, string contra, Equipo equipo, DateTime fechaIncorporacion)
         {
@@ -19,6 +24,7 @@ namespace Dominio.Entidades
             Contrasenia = contra;
             Equipo = equipo;
             FIncorporacion = fechaIncorporacion;
+
             
         }
 

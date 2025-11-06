@@ -31,7 +31,7 @@ namespace WebApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Login}/{action=Login}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }

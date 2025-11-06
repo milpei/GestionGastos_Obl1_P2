@@ -7,13 +7,14 @@ namespace Dominio.Entidades
         private Cargo _cargo = Cargo.Empleado;
          //cargo de prueba
         
-        public Cargo Cargo { get { return _cargo; } }
+        public Cargo Cargo { get; set; } 
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
         public string Email { get; set; }
         public Equipo Equipo { get; set; }
         public DateTime FIncorporacion { get; set; }
+ 
 
 
 

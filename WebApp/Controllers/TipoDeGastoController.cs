@@ -2,7 +2,7 @@
 
 namespace WebApp.Controllers
 {
-    public class EmpleadoController : Controller
+    public class TipoDeGastoController : Controller
     {
         public IActionResult Index()
         {

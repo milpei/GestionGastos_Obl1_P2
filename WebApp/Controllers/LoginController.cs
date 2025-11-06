@@ -17,32 +17,24 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult index(string email, string pwd)
+        public IActionResult Login(string email, string pwd)
         {
             try
             {
                 Usuario u = s.Login(email, pwd);
                 //Chequeo en s.Login() que no sea null
 
-                if (u.Cargo == Cargo.Empleado)
-                {
-                    HttpContext.Session.SetString("cargo", "empleado");
-                    //no sera mejor guardar el mail? asi guardo los datos de quien ingresó ("email",u.Email)
-                    return RedirectToAction("index","Empleado");
-                }
-                else
-                {
-                    HttpContext.Session.SetString("cargo", "gerente");
-                    return RedirectToAction("index", "Gerente");
-                }
+                    HttpContext.Session.SetString("cargo", u.Cargo.ToString());
+                    HttpContext.Session.SetString("email", u.Email);
+                 
+                return RedirectToAction("MiPerfil", "Usuario");
                 
                 
 
             } catch(Exception ex)
             {
                 ViewBag.msg = ex.Message;
-                return View();
-                //habria que redireccionarlo al login
+                return View("Index");
             }
         }
 

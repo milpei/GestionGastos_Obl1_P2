@@ -12,4 +12,9 @@
     <ProjectReference Include="..\GestionGastos_Obl1_P2\GestionGastos_Obl1_P2.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Equipo\" />
+    <Folder Include="Views\TipoDeGasto\" />
+  </ItemGroup>
+
 </Project>

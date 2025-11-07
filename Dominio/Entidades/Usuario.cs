@@ -2,7 +2,7 @@
 
 namespace Dominio.Entidades
 {
-    public class Usuario
+    public class Usuario : IValidar
     {
         private Cargo _cargo = Cargo.Empleado;
         

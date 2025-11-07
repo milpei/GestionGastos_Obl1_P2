@@ -1,0 +1,16 @@
+﻿@using Dominio.Entidades;
+
+<table>
+    <tr>
+        <th>Descripción </th>
+        <th>Monto</th>
+    </tr>
+@foreach (Pago p in Model)
+    {
+        <tr>
+            <td>@p.Descripcion </td>
+            <td>@p.Monto.ToString()</td>
+        </tr>
+    }
+
+</table>

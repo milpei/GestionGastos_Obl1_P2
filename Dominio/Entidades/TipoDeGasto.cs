@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidades
 {
-    public class TipoDeGasto
+    public class TipoDeGasto : IValidar
     {
         // Esta va a ser la unica clase que lo hago sin abreviar. 
         private string _nombre;

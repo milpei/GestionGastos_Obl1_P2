@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio.Entidades
 {
-    public class Equipo
+    public class Equipo : IValidar
     {
         private static int s_UltId = 0;
         private int _id;

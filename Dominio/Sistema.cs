@@ -169,6 +169,7 @@ namespace Dominio
             return pagosMesX;
         }
 
+      
         //DATOS DE PRECARGA;
 
         private void PrecargarDatos()
@@ -347,6 +348,29 @@ namespace Dominio
 
             return totalUsuarioXMesX;
         }
+
+        public List<Pago> PagosUsuarioXMesX(Usuario u, DateTime fecha)
+        {
+            List<Pago> PagosUsuarioXMesX = new List<Pago>();
+
+            foreach (Pago p in _pagos)
+            {
+                if (p.EsDelMesX(fecha) && p.Usuario.Equals(u))
+                {
+                    PagosUsuarioXMesX.Add(p);
+                }
+            }
+
+            return PagosUsuarioXMesX;
+        }
+
+        public List<Pago> PaUsXMeXDesc(Usuario u, DateTime fecha)
+        {
+            List<Pago> PagosUsuMesDesc = PagosUsuarioXMesX(u, fecha);
+            PagosUsuMesDesc.Sort(new PagosOrdDesc());
+            return PagosUsuMesDesc;
+        }
+
     }
 }
 

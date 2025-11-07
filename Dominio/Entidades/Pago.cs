@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidades
 {
-    public abstract class Pago
+    public abstract class Pago : IValidar
     {
         private static int s_UltId = 0;
         protected int _id;
@@ -60,5 +60,6 @@ namespace Dominio.Entidades
             return $"id: {_id}, Metodo de pago: {MetodoPago},";
         }
 
+       
     }
 }

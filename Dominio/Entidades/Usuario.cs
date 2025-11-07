@@ -5,9 +5,11 @@ namespace Dominio.Entidades
     public class Usuario
     {
         private Cargo _cargo = Cargo.Empleado;
-         //cargo de prueba
         
-        public Cargo Cargo { get; set; } 
+
+        //cargo de prueba
+
+        public Cargo Cargo { get { return _cargo; } set { _cargo = value; } }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }

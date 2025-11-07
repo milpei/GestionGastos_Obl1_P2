@@ -314,9 +314,8 @@ namespace Dominio
             {
                 AgregarPago(p);
             }
-
-
         }
+
 
         public Usuario Login(string email, string pwd)
         {
@@ -331,7 +330,22 @@ namespace Dominio
             }
 
             throw new Exception("Datos incorrectos");
+        }
 
+
+        public decimal GastoUsuarioXMesX(Usuario u, DateTime fecha)
+        {
+            decimal totalUsuarioXMesX = 0;
+
+            foreach (Pago p in _pagos)
+            {
+                if (p.EsDelMesX(fecha) && p.Usuario.Equals(u))
+                {
+                    totalUsuarioXMesX += p.Monto;
+                }
+            }
+
+            return totalUsuarioXMesX;
         }
     }
 }

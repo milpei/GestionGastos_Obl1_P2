@@ -38,5 +38,12 @@ namespace WebApp.Controllers
             }
         }
 
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return View("Index");
+        }
+
     }
 }

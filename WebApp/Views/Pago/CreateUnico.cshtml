@@ -1,27 +1,47 @@
-﻿
+﻿@using Dominio.Entidades;
 
 
-<h1>Login</h1>
+<h1>Pago Unico</h1>
+<br />
 
-<p>@ViewBag.msg</p>
-<form action="/Pago/CreateRecurrente" method="post">
+<form action="/Pago/CreateUnico" method="post">
     <label>Metodo de pago</label>
-    <input type="text" name="" />
+    <select name="metodo">
+        //El name es lo que mapea view con el httpPost
+
+        @foreach (MetodosDePago m in Enum.GetValues<MetodosDePago>())
+        {
+            <option value="@m">@m</option>
+        }
+    </select>
+
     <br />
-    <label>Tipo de Gasto</label>
-    <input type="text" name="" />
-    <br />
-    <label>Usuario</label>
-    <input type="text" name="" />
+    <label name="tipo">Tipo de Gasto</label>
+    <select name="tipo">
+        //El name es lo que mapea view con el httpPost
+
+        @foreach (TipoDeGasto t in @Model)
+        {
+            <option value="@t.Nombre">@t.Nombre</option>
+        }
+    </select>
     <br />
     <label>Descripcion</label>
-    <input type="text" name="" />
+    <input type="text" name="descripcion" />
     <br />
     <label>Monto</label>
-    <input type="text" name="" />
+    <input type="text" name="monto" />
+    <br />
+    <label>Numero de Recibo</label>
+    <input type="text" name="numRecibo" />
     <br />
     <label>Fecha de Fin</label>
-    <input type="text" name="" />
+    <input type="datetime-local" name="fPago" />
     <br />
-    <input type="submit" value="Login" />
+    <input type="submit" value="Cargar Pago" />
 </form>
+<br />
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-info">@ViewBag.Msg</div>
+}

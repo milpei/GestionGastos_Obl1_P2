@@ -1,0 +1,44 @@
+﻿@using Dominio.Entidades;
+
+
+<h1>Pago Recurrente</h1>
+<br/>
+
+<form action="/Pago/CreateRecurrente" method="post">
+    <label>Metodo de pago</label>
+    <select name="metodo">
+        //El name es lo que mapea view con el httpPost
+        
+        @foreach (MetodosDePago m in Enum.GetValues<MetodosDePago>())
+        {
+            <option value="@m">@m</option>
+        }
+    </select>
+
+    <br />
+    <label name ="tipo">Tipo de Gasto</label>
+    <select name="tipo">
+        //El name es lo que mapea view con el httpPost
+
+        @foreach (TipoDeGasto t in @Model )
+        {
+            <option value="@t.Nombre">@t.Nombre</option>
+        }
+    </select>
+    <br />
+    <label>Descripcion</label>
+    <input type="text" name="descripcion" />
+    <br />
+    <label>Monto</label>
+    <input type="text" name="monto" />
+    <br />
+    <label>Fecha de Fin</label>
+    <input type="datetime-local" name="fFin" />
+    <br />
+    <input type="submit" value="Cargar Pago" />
+</form>
+<br/>
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-info">@ViewBag.Msg</div>
+}

@@ -302,7 +302,7 @@ namespace Dominio
             new Unico(new DateTime(2025, 09, 07), "REC-1008", MetodosDePago.Debito,   tAfters,       u10, "Pizza cierre sprint",     380m),
             new Unico(new DateTime(2024, 09, 25), "REC-1009", MetodosDePago.Credito,  tAuto,         u11, "Peaje visita cliente",    180m),
             new Unico(new DateTime(2025, 08, 22), "REC-1010", MetodosDePago.Efectivo, tOficina,      u12, "Cables HDMI",             420m),
-            new Unico(new DateTime(2025, 10, 14), "REC-1011", MetodosDePago.Debito,   tHardware,     u13, "SSD externo",            3200m),
+            new Unico(new DateTime(2025, 11, 14), "REC-1011", MetodosDePago.Debito,   tHardware,     u13, "SSD externo",            3200m),
             new Unico(new DateTime(2025, 07, 03), "REC-1012", MetodosDePago.Credito,  tEventos,      u14, "Taller de UX",           2100m),
             new Unico(new DateTime(2025, 08, 10), "REC-1013", MetodosDePago.Efectivo, tComidas,      u15, "Desayuno demo",           290m),
             new Unico(new DateTime(2025, 09, 03), "REC-1014", MetodosDePago.Debito,   tNube,         u16, "IP fija adicional",       850m),
@@ -385,14 +385,43 @@ namespace Dominio
             }
             else if (p is Recurrente rec)
             {
+               
+                if (rec.FFin == DateTime.MinValue) //SI NO TIENE FIN...
+                {
+                    if (rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO...
+                    {
+                        return true;
+                    } 
+                    else if (rec.FInicio.Year == fecha.Year) // SI ARRANCO ESTE AÑO...
+                    {
+                        if (rec.FInicio.Month <= fecha.Month) return true; // ¿ARRANCO ANTES O DURANTE ESTE MES?
+                    }
 
-                if (rec.FFin == DateTime.MinValue && rec.FInicio.Month <= fecha.Month && rec.FInicio.Year <= fecha.Year)
-                {
-                    return true;
                 }
-                else if (rec.FInicio.Month <= fecha.Month && rec.FInicio.Year <= fecha.Year && rec.FFin.Month >= fecha.Month && rec.FFin.Year >= fecha.Year)
+
+                //TIENE FIN...
+
+                else if ( rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO...
                 {
-                    return true;
+                    if (rec.FFin.Year > fecha.Year) // SI TERMINA EL AÑO QUE VIENE O MAS
+                    {
+                        return true;
+                    } 
+                    else if (rec.FFin.Year == fecha.Year) //SI TERMINA ESTE AÑO
+                    {
+                        if (rec.FFin.Month >= fecha.Month) return true; //¿LA FECHA DE FIN ES POSTERIOR O IGUAL A ESTE MES?
+                    }
+                } 
+                else if (rec.FInicio.Year == fecha.Year && rec.FInicio.Month <= fecha.Month) //SI ARRANCO ESTE AÑO...
+                {
+                    if (rec.FFin.Year > fecha.Year) //SI TERMINA EL AÑO QUE VIENE
+                    {
+                        return true;
+                    }
+                    else if (rec.FFin.Year == fecha.Year) //SI TERMINA ESTE AÑO
+                    {
+                        return rec.FFin.Month >= fecha.Month; // ¿LA FECHA DE FIN ES POSTERIOR O IGUAL A ESTE MES?
+                    }
                 }
             }
                 return false;

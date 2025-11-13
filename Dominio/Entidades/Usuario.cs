@@ -4,7 +4,7 @@ namespace Dominio.Entidades
 {
     public class Usuario : IValidar
     {
-        private Cargo _cargo = Cargo.Gerente;
+        private Cargo _cargo = Cargo.Empleado;
         
 
         //cargo de prueba

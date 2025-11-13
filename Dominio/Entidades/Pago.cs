@@ -15,7 +15,7 @@ namespace Dominio.Entidades
         public TipoDeGasto TipoGasto { get; set; }
         public Usuario Usuario { get; set; }
         public  string Descripcion { get; set; }
-        public decimal Monto { get; set; }
+        public virtual decimal Monto { get; set; }
         public int Id {  get { return _id; } }
 
         public Pago (MetodosDePago metodoDePago, TipoDeGasto tipoDeGasto, Usuario usuario, string descripcion, decimal monto)

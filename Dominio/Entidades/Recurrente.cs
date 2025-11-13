@@ -13,7 +13,11 @@ namespace Dominio.Entidades
         public DateTime FInicio { get; set; } 
         public DateTime FFin { get; set; } 
         public int NumCuotas { get { return ObtenerCuotas(); } }
-        public decimal MontoFinal { get { return Monto * NumCuotas + Recargo() ; } }
+        public decimal MontoFinal { get { return Monto * NumCuotas ; } }
+        public override decimal Monto { get { return base.Monto + Recargo(); } set { base.Monto = value; } }
+        //Valor de la cuota con recargo.
+
+        
 
         public Recurrente(DateTime fechaInicio, DateTime fechaFin, MetodosDePago metodoPago, TipoDeGasto tipoGasto, Usuario usuario, string descripcion, decimal monto) : base(metodoPago, tipoGasto,usuario, descripcion, monto)
         {
@@ -27,15 +31,15 @@ namespace Dominio.Entidades
         {
             if (NumCuotas == 0 || NumCuotas <= 5)  
             {
-                return Monto * 0.03m;
+                return base.Monto * 0.03m;
             } 
             else if (NumCuotas >= 6 && NumCuotas <= 9)
             {
-                return Monto * 0.05m;
+                return base.Monto * 0.05m;
             }
             else
             {
-                return Monto * 0.1m;
+                return base.Monto * 0.1m;
             }
         }
 

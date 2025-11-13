@@ -7,11 +7,24 @@
     </tr>
 @foreach (Pago p in Model)
     {
-       // if (pagoi is Recu)
+        if (p is Unico u)
+        {
         <tr>
-            <td>@p.Descripcion </td>
-            <td>@p.Monto.ToString()</td>
+            <td>@u.Descripcion </td>
+            <td>@u.Monto</td>
+            <td>@u.FPago</td>
         </tr>
+
+        }
+        else if (p is Recurrente r)
+        {
+            <tr>
+                <td>@r.Descripcion </td>
+                <td>@r.Monto</td> 
+                <td>@r.FInicio</td>
+            </tr>
+        }
+        // En el monto hay que chequear que se el Valor de la cuota y no el total.
     }
 
 </table>

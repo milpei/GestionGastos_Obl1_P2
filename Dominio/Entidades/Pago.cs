@@ -53,8 +53,6 @@ namespace Dominio.Entidades
             TipoGasto.Validar();
         }
         
-        public abstract bool EsDelMesX(DateTime fecha);
-
         public override string ToString()
         {
             return $"id: {_id}, Metodo de pago: {MetodoPago},";

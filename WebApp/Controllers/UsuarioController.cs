@@ -11,6 +11,7 @@ namespace WebApp.Controllers
         public IActionResult MiPerfil()
         {
             Usuario u = s.ObtenerUsuarioPorMail(HttpContext.Session.GetString("email"));
+
             ViewBag.gastoUsuarioXMesX = s.GastoUsuarioXMesX(u, DateTime.Now);
 
             return View(u);

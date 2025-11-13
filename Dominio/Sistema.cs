@@ -17,7 +17,7 @@ namespace Dominio
         public List<TipoDeGasto> TiposDeGasto { get { return new List<TipoDeGasto>(_tiposDeGasto); } }
         public static Sistema Instancia
         {
-            get 
+            get
             {
                 if (_instancia == null) _instancia = new Sistema();
                 return _instancia;
@@ -35,7 +35,7 @@ namespace Dominio
             PrecargarDatos();
 
         }
-       
+
 
         public void AgregarUsuario(Usuario u)
         {
@@ -163,13 +163,13 @@ namespace Dominio
 
             foreach (Pago p in _pagos)
             {
-                if (p.EsDelMesX(fecha)) pagosMesX.Add(p);
+                if (ActivoMesX(p,fecha)) pagosMesX.Add(p);
             }
 
             return pagosMesX;
         }
 
-      
+
         //DATOS DE PRECARGA;
 
         private void PrecargarDatos()
@@ -340,7 +340,7 @@ namespace Dominio
 
             foreach (Pago p in _pagos)
             {
-                if (p.EsDelMesX(fecha) && p.Usuario.Equals(u))
+                if (ActivoMesX(p,fecha) && p.Usuario.Equals(u))
                 {
                     totalUsuarioXMesX += p.Monto;
                 }
@@ -355,7 +355,8 @@ namespace Dominio
 
             foreach (Pago p in _pagos)
             {
-                if (p.EsDelMesX(fecha) && p.Usuario.Equals(u))
+
+                if (ActivoMesX(p,fecha) && p.Usuario.Equals(u))
                 {
                     PagosUsuarioXMesX.Add(p);
                 }
@@ -367,10 +368,36 @@ namespace Dominio
         public List<Pago> PaUsXMeXDesc(Usuario u, DateTime fecha)
         {
             List<Pago> PagosUsuMesDesc = PagosUsuarioXMesX(u, fecha);
+
             PagosUsuMesDesc.Sort(new PagosOrdDesc());
             return PagosUsuMesDesc;
         }
 
+        public bool ActivoMesX(Pago p, DateTime fecha)
+        {
+            
+            if (p is Unico uni)
+            {
+                if (uni.FPago.Month == fecha.Month && uni.FPago.Year == fecha.Year)
+                {
+                    return true;
+                }
+            }
+            else if (p is Recurrente rec)
+            {
+
+                if (rec.FFin == DateTime.MinValue && rec.FInicio.Month <= fecha.Month && rec.FInicio.Year <= fecha.Year)
+                {
+                    return true;
+                }
+                else if (rec.FInicio.Month <= fecha.Month && rec.FInicio.Year <= fecha.Year && rec.FFin.Month >= fecha.Month && rec.FFin.Year >= fecha.Year)
+                {
+                    return true;
+                }
+            }
+                return false;
+
+        }
     }
 }
 

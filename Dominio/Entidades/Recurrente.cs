@@ -83,15 +83,11 @@ namespace Dominio.Entidades
             return cuotasPendientes.ToString();
         }
 
-        public override bool EsDelMesX(DateTime fecha)
-        {
-            bool iniciaAntes = FInicio.Year < fecha.Year || (FInicio.Year == fecha.Year && FInicio.Month <= fecha.Month);
+       
+     
+        
 
-            bool terminaDespues = (FFin == DateTime.MinValue) || (FFin.Year > fecha.Year) || (FFin.Year == fecha.Year && FFin.Month >= fecha.Month);
 
-            return iniciaAntes && terminaDespues;
-
-        }
 
         public override string ToString()
         {

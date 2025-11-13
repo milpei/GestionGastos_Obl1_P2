@@ -26,6 +26,7 @@ namespace WebApp.Controllers
 
                     HttpContext.Session.SetString("cargo", u.Cargo.ToString());
                     HttpContext.Session.SetString("email", u.Email);
+                
                  
                 return RedirectToAction("MiPerfil", "Usuario");
                 

@@ -1,0 +1,21 @@
+﻿@using Dominio.Entidades;
+
+
+<h1>Mi Perfil</h1>
+
+<p>@Model.Nombre</p>
+<p>@Model.Apellido</p>
+<p>@Model.FIncorporacion</p>
+<p>@Model.Equipo.Nombre</p>
+<h2>Los Miembros de tu Equipo</h2>
+        <ul>
+@foreach(Usuario u in ViewBag.MiembrosDelEquipoX)
+    {
+        <li>@u.Email</li>
+    }
+        </ul>
+
+
+<h3>Este Mes Gastaste:</h3> 
+<p>@ViewBag.gastoUsuarioXMesX.ToString()</p>
+

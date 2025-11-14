@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using Dominio.Entidades;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -26,10 +27,17 @@ namespace WebApp.Controllers
 
                     HttpContext.Session.SetString("cargo", u.Cargo.ToString());
                     HttpContext.Session.SetString("email", u.Email);
-                
-                 
-                return RedirectToAction("MiPerfil", "Usuario");
-                
+
+                if (HttpContext.Session.GetString("cargo") == "Empleado")
+                {
+                   return RedirectToAction("PerfilEmpleado", "Usuario");
+                }
+                else if(HttpContext.Session.GetString("cargo") == "Gerente")
+                {
+                    return RedirectToAction("PerfilGerente", "Usuario");
+                }
+
+                return View("Login");
                 
 
             } catch(Exception ex)

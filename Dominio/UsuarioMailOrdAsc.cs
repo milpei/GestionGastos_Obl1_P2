@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class PagosOrdDesc : IComparer<Pago>
+    public class UsuarioMailOrdAsc : IComparer<Usuario>
     {
-        public int Compare(Pago x, Pago y)
+        public int Compare(Usuario x, Usuario y)
         {
-            return x.Monto.CompareTo(y.Monto) * -1;
+            return x.Email.CompareTo(y.Email) * 1;
         }
     }
 }

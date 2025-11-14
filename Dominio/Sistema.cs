@@ -388,7 +388,7 @@ namespace Dominio
                
                 if (rec.FFin == DateTime.MinValue) //SI NO TIENE FIN...
                 {
-                    if (rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO...
+                    if (rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO O MENOS...
                     {
                         return true;
                     } 
@@ -401,7 +401,7 @@ namespace Dominio
 
                 //TIENE FIN...
 
-                else if ( rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO...
+                else if ( rec.FInicio.Year < fecha.Year) //SI ARRANCO EL AÑO PASADO O ANTES...
                 {
                     if (rec.FFin.Year > fecha.Year) // SI TERMINA EL AÑO QUE VIENE O MAS
                     {
@@ -427,6 +427,8 @@ namespace Dominio
                 return false;
 
         }
+
+        
     }
 }
 

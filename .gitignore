@@ -3,6 +3,32 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+### 
+
+AGREGADO POR GABO
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+bin/
+obj/
+
+# Otros archivos temporales
+*.cache
+*.db
+*.log
+*.tlog
+*.pdb
+*.vscode/
+
+###
+
+
 # User-specific files
 *.rsuser
 *.suo
